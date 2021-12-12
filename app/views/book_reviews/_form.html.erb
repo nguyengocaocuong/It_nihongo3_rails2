@@ -1,0 +1,39 @@
+<%= form_with(model: book_review) do |form| %>
+  <% if book_review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book_review.errors.count, "error") %> prohibited this book_review from being saved:</h2>
+
+      <ul>
+        <% book_review.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <strong>Title:</strong>
+  <%= @book.title %>
+</p>
+
+<p>
+  <strong>Number of pages:</strong>
+  <%= @book.number_of_pages %>
+</p>
+<p>
+  <strong>Number of detailt:</strong>
+  <%= @book.number_of_pages %>
+</p>
+<p>
+  <strong>Number of image:</strong>
+  <%=image_tag @book.image , style:'width:100px;height:150px'%>
+</p>
+
+  <div class="field">
+    <%= form.label :review %>
+    <%= form.text_area :review %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

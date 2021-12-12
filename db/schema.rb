@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_12_060910) do
+ActiveRecord::Schema.define(version: 2021_12_12_061819) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 2021_12_12_060910) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "book_reviews", force: :cascade do |t|
+    t.text "review"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.index ["book_id"], name: "index_book_reviews_on_book_id"
+    t.index ["user_id"], name: "index_book_reviews_on_user_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.integer "number_of_pages"
@@ -62,4 +72,6 @@ ActiveRecord::Schema.define(version: 2021_12_12_060910) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_reviews", "books"
+  add_foreign_key "book_reviews", "users"
 end
